@@ -18,6 +18,7 @@ As a buyer, you can:
 
 ```
 deposit coins into the machine
+return your deposited coins
 buy a product using the interface
 receive change (if any)
 edit your username
@@ -58,12 +59,13 @@ I have mostly used styled-components to loosely style the code.
 
 I have not written any tests for the frontend yet. The backend project has some tests. `cd node-api` and run `npm test`. I used jest with Supertest to test api routes.
 
-### Further work
+There is an insominium export with all the available routes to ping the api. You will first need to signup to get an auth token, and add it to the environment under the record `token`.
+
+### Further work
+
 
 As well as other things mentioned above, I would like to:
 
-implement stricter password rules
-
-validate data on the frontend, using react-formik
-
-customize alerts in the web
+- implement stricter password rules
+- validate data on the frontend, using react-formik
+- customize alerts in the web
