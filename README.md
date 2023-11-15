@@ -35,6 +35,8 @@ Run `npm start` in the react-app directory. Open [http://localhost:3000](http://
 
 Run `npm run dev` in the node-api directory to serve data to the frontend.
 
+You will need to configure a database and edit the .env file with the correct config. 
+
 ### Backend
 
 The backend is written in Node using Express. I have setup some boilerplate code for the server to make it easy to develop additional routes without much pain.

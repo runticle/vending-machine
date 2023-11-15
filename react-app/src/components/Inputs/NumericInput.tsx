@@ -1,6 +1,7 @@
 import React, { ChangeEvent, InputHTMLAttributes, useCallback } from 'react';
 import styled from 'styled-components';
 import { Body2 } from '../TextComponents/Body2';
+import { globalErrorHandler } from '../../utils/functions/globalErrorHandler';
 
 interface NumericInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	value?: number;
@@ -54,7 +55,10 @@ export const NumericInput: React.FC<NumericInputProps> = ({
 
 				onChangeValue(value);
 			} catch (error) {
-				console.log('error');
+				globalErrorHandler({
+					title: 'Error parsing value',
+					error
+				});
 			}
 		},
 		[onChangeValue],

@@ -95,13 +95,6 @@ export default function ProductProvider({ children }: ProductProviderProps) {
 				async createProduct({ product_name, cost, amount_available }) {
 					setLoading(true);
 
-					console.log(
-						'createProduct',
-						product_name,
-						cost,
-						amount_available,
-					);
-
 					try {
 						const response = await API.post({
 							path: '/products/create',

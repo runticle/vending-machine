@@ -9,7 +9,7 @@ export const createAuthHandler = (authLevel: AuthLevel) => async (req: RequestWi
 	const token = req.header('Authorization');
 
 	if (!token) {
-		console.log('no token');
+		console.log('User has no token.');
 		return res.status(401).json({ error: 'Unauthorized', success: false });
 	}
 
@@ -27,7 +27,7 @@ export const createAuthHandler = (authLevel: AuthLevel) => async (req: RequestWi
 
 		next();
 	} catch (error: StatusError | any) {
-		console.log('error in terror');
+		console.log('Auth error:', error.message );
 		return res.status(error.status ?? 403).json({ error: error.message ?? 'Unauthorized', success: false });
 	}
 };

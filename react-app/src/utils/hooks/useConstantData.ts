@@ -18,8 +18,8 @@ export default function useConstantData() {
 		try {
 			await fetchUser();
 			await fetchProducts();
-		} catch (error) {
-			console.log(error);
+		} catch {
+			// no nothing
 		}
 	}, [fetchUser, fetchProducts]);
 
