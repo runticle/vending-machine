@@ -1,17 +1,15 @@
 import { Coin, ValidCoinTypes } from '../../../../context/User/types';
 import { useUserContext } from '../../../../context/User/useUserContext';
 import { useCallback, useEffect, useState } from 'react';
-import { formatMoney } from '../../../../utils/functions/formatMoney';
 import Box from '../../../UI/Box';
-import { useStyles } from './styles';
 import { globalErrorHandler } from '../../../../utils/functions/globalErrorHandler';
 import styled from 'styled-components';
-import { Body2 } from '../../../TextComponents/Body2';
 import { Heading2 } from '../../../TextComponents/Heading2';
 import Button from '../../../UI/Button';
+import { SingleCoin } from './components/SingleCoin/component';
 
 export const Deposit: React.FC = () => {
-	const { depositCoin, loading, change, setChange } = useUserContext();
+	const { depositCoin, change, setChange } = useUserContext();
 
 	const [changeCoins, setChangeCoins] = useState<JSX.Element[]>([]);
 
@@ -49,7 +47,6 @@ export const Deposit: React.FC = () => {
 						<SingleCoin
 							key={`${coin}-${timestamp}-${i}`}
 							coin={coin}
-							onPress={() => void 0}
 						/>,
 					);
 				}
@@ -97,7 +94,7 @@ const ChangeContainer = styled.div`
 
 	justify-content: flex-start;
 
-	@keyframes rollIn {
+	@keyframes appear {
 		from {
 			opacity: 0;
 		}
@@ -107,21 +104,9 @@ const ChangeContainer = styled.div`
 	}
 
 	> div {
-		animation: rollIn 1s ease-out;
+		animation: appear 1s ease-out;
 	}
 `;
-
-const SingleCoin = ({ coin, onPress }: { coin: Coin; onPress: () => void }) => {
-	const styles = useStyles();
-
-	const amount = parseInt(coin);
-
-	return (
-		<CoinStyle onClick={onPress}>
-			<Body2 style={styles.coinText}>{formatMoney(amount)}</Body2>
-		</CoinStyle>
-	);
-};
 
 const WalletStyle = styled.div`
 	display: flex;
@@ -129,24 +114,4 @@ const WalletStyle = styled.div`
 	flex-wrap: wrap;
 
 	justify-content: space-between;
-`;
-
-const CoinStyle = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	background-color: goldenrod;
-	border: 3px dashed darkgoldenrod;
-	border-radius: 50%;
-	box-shadow: 0 0 5px 0 goldenrod;
-	padding: 0.3rem;
-	margin: 0.5rem;
-
-	transition: transform 0.3s ease;
-
-	&:hover {
-		cursor: pointer;
-		transform: translateY(-5px);
-	}
 `;
