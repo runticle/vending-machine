@@ -21,7 +21,7 @@ export const LoginButton: React.FC = () => {
 
 			try {
 				await login({
-					username: username.trim(),
+					username,
 					password,
 				});
 
