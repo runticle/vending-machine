@@ -42,10 +42,9 @@ export const Deposit: React.FC = () => {
 				const numCoins = change[coin] as unknown as number;
 
 				for (let i = 0; i < numCoins; i++) {
-					const timestamp = Date.now();
 					newCoinsArray.push(
 						<SingleCoin
-							key={`${coin}-${timestamp}-${i}`}
+							key={`${coin}-${i}`}
 							coin={coin}
 						/>,
 					);
