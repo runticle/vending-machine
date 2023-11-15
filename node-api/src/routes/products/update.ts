@@ -6,9 +6,28 @@ import { RequestWithAuth } from '../../server/types';
 
 const createProductSchema = z.object({
 	id: z.number(),
-	product_name: z.string().optional(),
-	cost: z.number().min(0).int().max(500_000_00).optional(), // in pennies
-	amount_available: z.number().min(0).max(1000).int().optional(), // should be capped. unless it's a huge machine lol
+	product_name: z
+		.string()
+		.refine(name => name.trim().length > 0, {
+			message: 'Product name must be at least 1 character long.',
+		})
+		.optional(),
+	cost: z
+		.number()
+		.min(0)
+		.int()
+		.max(500_000_00, {
+			message: 'Cost must be at most €500,000.00',
+		})
+		.optional(), // in pennies
+	amount_available: z
+		.number()
+		.min(0)
+		.max(1000, {
+			message: 'Amount available must be at most 1000',
+		})
+		.int()
+		.optional(), // should be capped. unless it's a huge machine lol
 });
 
 const handler = async function (req: RequestWithAuth) {
@@ -24,16 +43,18 @@ const handler = async function (req: RequestWithAuth) {
 
 	if (!product) throw new StatusError('Product not found.', 404);
 
-	if (body.product_name) {
+	const trimmedName = body.product_name?.trim();
+
+	if (trimmedName) {
 		// check no other products from the seller with the same name
-		const existingProduct = await Product.findOne({ where: { seller_id: seller.id, product_name: body.product_name } });
+		const existingProduct = await Product.findOne({ where: { seller_id: seller.id, product_name: trimmedName } });
 
 		if (existingProduct) throw new StatusError('You already have a product with that name.', 400);
 	}
 
-	if (body.product_name) product.product_name = body.product_name;
-	if (body.cost) product.cost = body.cost;
-	if (body.amount_available) product.amount_available = body.amount_available;
+	if (body.product_name !== undefined) product.product_name = trimmedName;
+	if (body.cost !== undefined) product.cost = body.cost;
+	if (body.amount_available !== undefined) product.amount_available = body.amount_available;
 
 	await product.save();
 

@@ -2,11 +2,11 @@ import React, { useCallback, useState } from 'react';
 import Modal from '../../../UI/Modal';
 import Button from '../../../UI/Button';
 import { useAuthContext } from '../../../../context/Auth/useAuthContext';
-import { TextInput } from '../../../Inputs/TextInput';
 import { Form } from '../../../UI/Form/component';
 import { Heading2 } from '../../../TextComponents/Heading2';
 import { globalErrorHandler } from '../../../../utils/functions/globalErrorHandler';
 import { notifySuccess } from '../../../../utils/functions/notifySuccess';
+import { PasswordInput } from '../../../Inputs/PasswordInput';
 
 export const EditPassword: React.FC = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,10 +63,9 @@ export const EditPassword: React.FC = () => {
 				<Form>
 					<Heading2>Edit password</Heading2>
 
-					<TextInput
+					<PasswordInput
 						placeholder="Enter new password..."
 						value={password}
-						type="password"
 						onChangeValue={setPassword}
 					/>
 
@@ -74,6 +73,7 @@ export const EditPassword: React.FC = () => {
 						title="Submit"
 						onPress={handleEditPassword}
 						loading={loading}
+						disabled={!password}
 					/>
 				</Form>
 			</Modal>

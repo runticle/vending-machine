@@ -13,7 +13,7 @@ import { globalErrorHandler } from '../../../../utils/functions/globalErrorHandl
 export const EditProductButton = ({ product }: { product: Product }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const { loading, updateProduct } = useProductContext();
+	const { updateProduct } = useProductContext();
 
 	const handleEditProduct = useCallback(
 		async (newProduct: {
@@ -22,8 +22,6 @@ export const EditProductButton = ({ product }: { product: Product }) => {
 			amountAvailable: number;
 		}) => {
 			const payload: Partial<UpdateProductPayload> = {};
-
-			console.log('cost', newProduct.cost);
 
 			if (newProduct.productName !== product.product_name)
 				payload.product_name = newProduct.productName;
@@ -74,7 +72,6 @@ export const EditProductButton = ({ product }: { product: Product }) => {
 				<ProductForm
 					onSubmit={handleEditProduct}
 					existingProduct={product}
-					loading={!!loading}
 				/>
 			</Modal>
 		</div>

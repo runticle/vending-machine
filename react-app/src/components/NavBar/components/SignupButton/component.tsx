@@ -8,6 +8,7 @@ import { ChooseRole } from '../../../Inputs/ChooseRole';
 import { Form } from '../../../UI/Form/component';
 import { Heading2 } from '../../../TextComponents/Heading2';
 import { globalErrorHandler } from '../../../../utils/functions/globalErrorHandler';
+import { PasswordInput } from '../../../Inputs/PasswordInput';
 
 export const SignupButton: React.FC = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,10 +73,9 @@ export const SignupButton: React.FC = () => {
 						onChangeValue={setUsername}
 					/>
 
-					<TextInput
+					<PasswordInput
 						placeholder="Enter password..."
 						value={password}
-						type="password"
 						onChangeValue={setPassword}
 					/>
 
@@ -88,6 +88,7 @@ export const SignupButton: React.FC = () => {
 						title="Submit"
 						onPress={handleSignup}
 						loading={loading}
+						disabled={!username || !password}
 					/>
 				</Form>
 			</Modal>

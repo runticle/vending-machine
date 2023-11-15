@@ -1,4 +1,9 @@
-import React, { ChangeEvent, InputHTMLAttributes, useCallback } from 'react';
+import React, {
+	ChangeEvent,
+	InputHTMLAttributes,
+	useCallback,
+	useRef,
+} from 'react';
 import styled from 'styled-components';
 import { Body2 } from '../TextComponents/Body2';
 import { globalErrorHandler } from '../../utils/functions/globalErrorHandler';
@@ -46,18 +51,21 @@ export const NumericInput: React.FC<NumericInputProps> = ({
 	title,
 	...props
 }) => {
+	const lastSafeValue = useRef(0);
+
 	const handleChangeValue = useCallback(
 		(event: ChangeEvent<HTMLInputElement>) => {
 			try {
 				const value = isNaN(Number(event.target.value))
-					? 0
+					? lastSafeValue.current
 					: parseInt(event.target.value);
 
 				onChangeValue(value);
+				lastSafeValue.current = value;
 			} catch (error) {
 				globalErrorHandler({
 					title: 'Error parsing value',
-					error
+					error,
 				});
 			}
 		},
@@ -74,11 +82,15 @@ export const NumericInput: React.FC<NumericInputProps> = ({
 			<StyledInput
 				name="number-input"
 				keyboard-type="number-pad"
-				value={value || ''}
+				value={safeValue(value)}
 				onChange={handleChangeValue}
 				placeholder={placeholder}
 				{...props}
 			/>
 		</>
 	);
+};
+
+const safeValue = (value: number | null | undefined): string => {
+	return typeof value === 'number' && !isNaN(value) ? String(value) : '';
 };

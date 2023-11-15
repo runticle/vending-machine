@@ -78,6 +78,7 @@ export const LoginButton: React.FC = () => {
 						title="Login"
 						loading={loading}
 						onPress={handleLogin}
+						disabled={!username || !password}
 					/>
 				</Form>
 			</Modal>

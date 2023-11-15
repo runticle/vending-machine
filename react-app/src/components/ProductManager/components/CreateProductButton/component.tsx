@@ -13,7 +13,7 @@ export const CreateProductButton: React.FC = () => {
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const { loading, createProduct } = useProductContext();
+	const { createProduct } = useProductContext();
 
 	const handleCreateProduct = useCallback(
 		async (product: {
@@ -66,10 +66,7 @@ export const CreateProductButton: React.FC = () => {
 				onClose={handleCloseModal}
 			>
 				<Heading2>Create Product</Heading2>
-				<ProductForm
-					onSubmit={handleCreateProduct}
-					loading={!!loading}
-				/>
+				<ProductForm onSubmit={handleCreateProduct} />
 			</Modal>
 		</div>
 	);

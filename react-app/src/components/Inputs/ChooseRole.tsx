@@ -16,7 +16,7 @@ const Separator = styled.div`
 	background-color: var(--ctaColorDimmest);
 `;
 
-const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })`
+const StyledCheckbox = styled.input`
 	appearance: none;
 	width: 1.2rem;
 	height: 1.2rem;

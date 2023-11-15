@@ -9,7 +9,6 @@ import { CostInput } from '../../../Inputs/CostInput';
 export const ProductForm = ({
 	existingProduct,
 	onSubmit,
-	loading,
 }: {
 	existingProduct?: Product;
 	onSubmit: (product: {
@@ -17,7 +16,6 @@ export const ProductForm = ({
 		cost: number;
 		amountAvailable: number;
 	}) => Promise<void>;
-	loading: boolean;
 }) => {
 	const [productName, setProductName] = useState<Product['product_name']>('');
 	const [cost, setCost] = useState('');
@@ -37,7 +35,7 @@ export const ProductForm = ({
 			event.preventDefault();
 
 			await onSubmit({
-				productName: productName,
+				productName: productName.trim(),
 				cost: safeParseCostToPennies(cost),
 				amountAvailable: amountAvailable,
 			});
@@ -71,7 +69,7 @@ export const ProductForm = ({
 			<Button
 				title="Submit"
 				onPress={handleSubmit}
-				loading={loading}
+				disabled={!productName || !cost || !(amountAvailable >= 0)}
 			/>
 		</Form>
 	);

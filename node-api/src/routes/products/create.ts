@@ -6,9 +6,23 @@ import { StatusError } from '../../server/errors/helpers/StatusError';
 import { RequestWithAuth } from '../../server/types';
 
 const createProductSchema = z.object({
-	product_name: z.string(),
-	cost: z.number().min(0).max(500_000_00).int(),
-	amount_available: z.number().min(0).max(1000).int(), // should be capped. unless it's a huge machine lol
+	product_name: z.string().refine(name => name.trim().length > 0, {
+		message: 'Product name must be at least 1 character long.',
+	}),
+	cost: z
+		.number()
+		.min(0)
+		.max(500_000_00, {
+			message: 'Cost must be at most €500,000.00',
+		})
+		.int(),
+	amount_available: z
+		.number()
+		.min(0)
+		.max(1000, {
+			message: 'Amount available must be at most 1000',
+		})
+		.int(), // should be capped. unless it's a huge machine lol
 });
 
 const handler = async function (req: RequestWithAuth) {
