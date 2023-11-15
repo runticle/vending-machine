@@ -49,11 +49,17 @@ I would also like to type the data coming into the route handlers. This can be d
 
 Also, I would have liked to implement soft deletes. At the moment, deleting a user cascades the deletion and removes all access tokens and existing products.
 
+I have used `jwt` for authentication. Certain routes are also guarded by a user-type authentication. i.e. only buyers can access `/products/buy`.
+
 ### Frontend
 
 The frontend is written in React. I have not spent much time on designing the interface. I have used a few external packages (again, just to get a feel for them and see how they work).
 
-I have not done much as muh data validation on the frontend as I'd like. Ideally I would share the zod schemas across the front and backend. I am storing data simply in localstorage. With more time I would like to implement redux, but as it is such a small project I decided against doing so at the beginning.
+It is a single page web app, with no routing setup.
+
+I have not done much as muh data validation on the frontend as I'd like. Ideally I would share the zod schemas across the front and backend. 
+
+I am storing data simply in localstorage. With more time I would like to implement redux, but as it is such a small project I decided against doing so at the beginning.
 
 I have mostly used styled-components to loosely style the code.
 
