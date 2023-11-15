@@ -6,7 +6,7 @@ import { globalErrorHandler } from '../../../../utils/functions/globalErrorHandl
 import styled from 'styled-components';
 import { Heading2 } from '../../../TextComponents/Heading2';
 import Button from '../../../UI/Button';
-import { SingleCoin } from './components/SingleCoin/component';
+import SingleCoin from './components/SingleCoin';
 
 export const Deposit: React.FC = () => {
 	const { depositCoin, change, setChange } = useUserContext();
