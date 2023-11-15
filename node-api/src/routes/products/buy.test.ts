@@ -88,7 +88,7 @@ describe(path, () => {
 		});
 
 		expect(res.status).toEqual(400);
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Amount must be at least 1');
 	});
 
 	it('should return 400 if the user has insufficient balance', async () => {

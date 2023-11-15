@@ -11,10 +11,10 @@ const createUserSchema = z.object({
 	username: z
 		.string()
 		.min(3, {
-			message: 'Username must be at least 3 characters long.',
+			message: 'Username must be at least 3 characters long with no whitespace.',
 		})
-		.max(64, {
-			message: 'Username must be at most 64 characters long.',
+		.max(32, {
+			message: 'Username must be at most 32 characters long.',
 		})
 		.refine(s => !s.includes(' '), 'Username cannot contain whitespace.'),
 	password: z

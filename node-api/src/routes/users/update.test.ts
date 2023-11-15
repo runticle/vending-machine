@@ -65,7 +65,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Password must be at least 6 characters long.');
 	});
 	it('should return 400 if a password is too long', async () => {
 		const data = {
@@ -82,7 +82,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Password must be at most 32 characters long.');
 	});
 	it('should return 200, and update the password', async () => {
 		const data = {

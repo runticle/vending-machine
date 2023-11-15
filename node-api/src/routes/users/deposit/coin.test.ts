@@ -65,7 +65,7 @@ describe(path, () => {
 		});
 
 		expect(res.status).toEqual(400);
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual("Invalid enum value. Expected '5' | '10' | '20' | '50' | '100', received '15'");
 	});
 	it('should return 200 and the user with the new deposit, and save the users deposit', async () => {
 		const data = {

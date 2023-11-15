@@ -28,7 +28,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Required');
 	});
 	it('should return 400 if a password is not sent', async () => {
 		const data = {
@@ -43,7 +43,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Required');
 	});
 	it('should return 400 if a role is not sent', async () => {
 		const data = {
@@ -58,7 +58,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Required');
 	});
 	it('should return 400 if an invalid role is sent', async () => {
 		const data = {
@@ -74,7 +74,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual("Invalid enum value. Expected 'buyer' | 'seller', received 'invalid'");
 	});
 	it('should return 400 if a username is too long', async () => {
 		const data = {
@@ -90,7 +90,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Username must be at most 32 characters long.');
 	});
 	it('should return 400 if a password is too short', async () => {
 		const data = {
@@ -106,7 +106,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Password must be at least 6 characters long.');
 	});
 	it('should return 400 if a password is too long', async () => {
 		const data = {
@@ -122,7 +122,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Password must be at most 64 characters long.');
 	});
 	it('should return 400 if a username contains whitespaces', async () => {
 		const data = {
@@ -138,7 +138,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Username cannot contain whitespace.');
 	});
 	it('should return 400 if a username is too short', async () => {
 		const data = {
@@ -154,7 +154,7 @@ describe(path, () => {
 
 		expect(res.status).toEqual(400);
 
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Username must be at least 3 characters long with no whitespace.');
 	});
 	it('should return 400 if a user already exists with that username', async () => {
 		const data = {
@@ -214,7 +214,7 @@ describe(path, () => {
 		});
 
 		expect(res.status).toEqual(400);
-		expect(res.body.error).toEqual('Invalid data');
+		expect(res.body.error).toEqual('Username cannot contain whitespace.');
 	});
 	// todo test password requirements
 	it('should return 200 and an access token, and create a BUYER user', async () => {

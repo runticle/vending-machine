@@ -7,11 +7,10 @@ import { createConnection } from 'typeorm';
 // Using deprecated methods here, had some difficulty with the test connection.
 
 beforeAll(async () => {
-	// Drop database before running tests
 	if (global.testConn) {
 		await global.testConn.close();
 	}
-	global.testConn = await createTestConnection();
+	global.testConn = await createTestConnection(true);
 });
 
 afterAll(async () => {

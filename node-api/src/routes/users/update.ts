@@ -12,8 +12,8 @@ const updateUserSchema = z.object({
 		.min(6, {
 			message: 'Password must be at least 6 characters long.',
 		})
-		.max(64, {
-			message: 'Password must be at most 64 characters long.',
+		.max(32, {
+			message: 'Password must be at most 32 characters long.',
 		})
 		.optional(),
 });
